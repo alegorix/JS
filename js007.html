@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chronomètre JS</title>
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: monospace; background: #2c3e50; color: white; }
+        #temps { font-size: 5rem; margin-bottom: 20px; }
+        button { padding: 10px 20px; font-size: 1rem; cursor: pointer; border: none; border-radius: 5px; margin: 5px; }
+        .start { background: #27ae60; color: white; }
+        .stop { background: #e74c3c; color: white; }
+    </style>
+</head>
+<body>
+
+    <div id="temps">0</div>
+    <div>
+        <button class="start" onclick="demarrer()">Démarrer</button>
+        <button class="stop" onclick="arreter()">Arrêter</button>
+    </div>
+
+    <script>
+        let secondes = 0;
+        let intervalle = null;
+
+        function demarrer() {
+            // On évite de lancer plusieurs intervalles en même temps
+            if (intervalle) return; 
+
+            intervalle = setInterval(() => {
+                secondes++;
+                document.getElementById('temps').innerText = secondes;
+            }, 1000); // 1000ms = 1 seconde
+        }
+
+        function arreter() {
+            clearInterval(intervalle);
+            intervalle = null;
+        }
+    </script>
+</body>
+</html>
