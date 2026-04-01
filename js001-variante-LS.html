@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dark Mode Professionnel</title>
+    <style>
+        /* 1. Les variables CSS (très pratique pour le JS) */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --btn-bg: #3498db;
+        }
+
+        /* 2. Le thème sombre */
+        body.dark-theme {
+            --bg-color: #1a1a1a;
+            --text-color: #f4f4f4;
+            --btn-bg: #f1c40f;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            transition: all 0.4s ease; /* Animation fluide */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--btn-bg);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        button:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <h1 id="titre">Mode Clair</h1>
+    <p>Cette préférence sera enregistrée dans votre navigateur.</p>
+    
+    <button id="themeBtn" onclick="toggleTheme()">Passer au mode sombre</button>
+
+    <script>
+        // Sélection des éléments
+        const btn = document.getElementById('themeBtn');
+        const titre = document.getElementById('titre');
+        const corps = document.body;
+
+        // --- ÉTAPE 1 : Vérifier si un thème est déjà enregistré (comme un Cookie/Session PHP) ---
+        const themeActuel = localStorage.getItem('theme');
+
+        if (themeActuel === 'dark') {
+            corps.classList.add('dark-theme');
+            appliquerTexteSombre();
+        }
+
+        // --- ÉTAPE 2 : La fonction qui bascule ---
+        function toggleTheme() {
+            // .toggle ajoute la classe si absente, l'enlève si présente
+            corps.classList.toggle('dark-theme');
+
+            // On vérifie si on est en sombre après le clic
+            if (corps.classList.contains('dark-theme')) {
+                appliquerTexteSombre();
+                localStorage.setItem('theme', 'dark'); // On enregistre
+            } else {
+                appliquerTexteClair();
+                localStorage.setItem('theme', 'light'); // On enregistre
+            }
+        }
+
+        // Fonctions utilitaires pour le texte (plus propre)
+        function appliquerTexteSombre() {
+            titre.innerText = "Mode Sombre";
+            btn.innerText = "Passer au mode clair";
+            btn.style.color = "#333"; // On ajuste la couleur du texte du bouton
+        }
+
+        function appliquerTexteClair() {
+            titre.innerText = "Mode Clair";
+            btn.innerText = "Passer au mode sombre";
+            btn.style.color = "white";
+        }
+    </script>
+</body>
+</html>
