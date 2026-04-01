@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Compteur Dynamique</title>
+    <style>
+        .container { text-align: center; margin-top: 100px; }
+        #chiffre { font-size: 80px; font-weight: bold; display: block; }
+        .positif { color: green; }
+        .negatif { color: red; }
+        button { font-size: 20px; margin: 5px; width: 50px; height: 50px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span id="chiffre">0</span>
+        <button onclick="modifier(-1)">-</button>
+        <button onclick="modifier(1)">+</button>
+    </div>
+
+    <script>
+        let compteur = 0;
+
+        function modifier(valeur) {
+            compteur = compteur + valeur;
+            const affichage = document.getElementById('chiffre');
+            
+            // Mise à jour du texte
+            affichage.innerText = compteur;
+
+            // Logique de couleur (comme un if en PHP)
+            if (compteur > 0) {
+                affichage.className = "positif";
+            } else if (compteur < 0) {
+                affichage.className = "negatif";
+            } else {
+                affichage.className = "";
+            }
+        }
+    </script>
+</body>
+</html>
