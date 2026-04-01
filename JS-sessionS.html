@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SessionStorage : Brouillon Auto</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; line-height: 1.6; background: #f0f2f5; }
+        .form-container { background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .status { font-size: 0.85rem; color: #666; font-style: italic; }
+        button { background: #28a745; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #218838; }
+        .info-box { margin-top: 20px; font-size: 0.9rem; color: #555; background: #e7f3ff; padding: 10px; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Nouveau Message</h2>
+        <p class="status" id="statut">Aucune modification</p>
+
+        <input type="text" id="sujet" placeholder="Sujet du message">
+        <textarea id="contenu" rows="5" placeholder="Écrivez votre message ici..."></textarea>
+        
+        <button onclick="envoyer()">Envoyer (Vider la session)</button>
+
+        <div class="info-box">
+            <strong>Test :</strong> Écrivez quelque chose, puis <strong>actualisez la page (F5)</strong>. 
+            Le texte restera là ! Fermez l'onglet et rouvrez-le : le texte aura disparu.
+        </div>
+    </div>
+
+    <script>
+        const inputSujet = document.getElementById('sujet');
+        const inputContenu = document.getElementById('contenu');
+        const statut = document.getElementById('statut');
+
+        // --- 1. CHARGEMENT : Au rafraîchissement de la page ---
+        window.onload = () => {
+            if (sessionStorage.getItem('brouillon_sujet')) {
+                inputSujet.value = sessionStorage.getItem('brouillon_sujet');
+            }
+            if (sessionStorage.getItem('brouillon_contenu')) {
+                inputContenu.value = sessionStorage.getItem('brouillon_contenu');
+            }
+            if (inputSujet.value || inputContenu.value) {
+                statut.innerText = "Brouillon restauré depuis la session.";
+            }
+        };
+
+        // --- 2. SAUVEGARDE : À chaque touche pressée (Event Input) ---
+        // On écoute les changements sur les deux champs
+        [inputSujet, inputContenu].forEach(champ => {
+            champ.addEventListener('input', () => {
+                sessionStorage.setItem('brouillon_sujet', inputSujet.value);
+                sessionStorage.setItem('brouillon_contenu', inputContenu.value);
+                statut.innerText = "Enregistrement du brouillon...";
+            });
+        });
+
+        // --- 3. NETTOYAGE : Quand on simule l'envoi ---
+        function envoyer() {
+            alert("Message envoyé ! La session va être vidée.");
+            // Comme unset($_SESSION['var']) en PHP
+            sessionStorage.clear(); 
+            location.reload(); // Recharge la page pour repartir à zéro
+        }
+    </script>
+</body>
+</html>
