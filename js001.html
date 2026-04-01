@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Effet Dark/Light Mode</title>
+    <style>
+        body { transition: background 0.4s, color 0.4s; font-family: sans-serif; padding: 50px; text-align: center; }
+        /* La classe que JS va ajouter/enlever */
+        .dark-theme { background: #222; color: #fff; }
+        button { padding: 10px 20px; cursor: pointer; border-radius: 5px; border: none; background: #007bff; color: white; }
+    </style>
+</head>
+<body id="monBody">
+
+    <h1>Mon site en JS</h1>
+    <p>Cliquez sur le bouton pour changer l'ambiance.</p>
+    <button onclick="toggleTheme()">Changer de thème</button>
+
+    <script>
+        function toggleTheme() {
+            // On récupère le body
+            const corps = document.getElementById('monBody');
+            // On "bascule" (ajoute ou retire) la classe CSS
+            corps.classList.toggle('dark-theme');
+        }
+    </script>
+</body>
+</html>
