@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ma Liste</title>
+    <style>
+        body { max-width: 400px; margin: 50px auto; font-family: sans-serif; }
+        .flex { display: flex; gap: 10px; }
+        input { flex-grow: 1; padding: 8px; }
+        ul { list-style: none; padding: 0; margin-top: 20px; }
+        li { background: #fff; border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
+        .delete-btn { background: #ff7675; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h2>Ma Liste de Courses</h2>
+    <div class="flex">
+        <input type="text" id="articleInput" placeholder="Ajouter un article...">
+        <button onclick="ajouter()">Ajouter</button>
+    </div>
+
+    <ul id="maListe"></ul>
+
+    <script>
+        function ajouter() {
+            const input = document.getElementById('articleInput');
+            const texte = input.value;
+
+            if (texte === "") return; // Sécurité si vide
+
+            const liste = document.getElementById('maListe');
+
+            // 1. Créer un nouvel élément <li>
+            const nouveauLi = document.createElement('li');
+            
+            // 2. Remplir le contenu du <li>
+            nouveauLi.innerHTML = `
+                <span>${texte}</span>
+                <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+            `;
+
+            // 3. L'ajouter à la liste <ul>
+            liste.appendChild(nouveauLi);
+
+            // 4. Vider l'input
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
