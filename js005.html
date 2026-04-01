@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Générateur de Pass</title>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; background: #eef; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        #pass { font-family: monospace; font-size: 1.5rem; color: #333; background: #eee; padding: 10px; display: block; margin: 15px 0; border-radius: 5px; }
+        button { background: #6c5ce7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h3>Sécurité Express</h3>
+        <span id="pass">cliquez pour générer</span>
+        <button onclick="generer()">Nouveau Mot de Passe</button>
+    </div>
+
+    <script>
+        function generer() {
+            const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
+            let resultat = "";
+            
+            // Boucle for identique au PHP
+            for (let i = 0; i < 12; i++) {
+                // Math.random() remplace rand()
+                let index = Math.floor(Math.random() * caracteres.length);
+                resultat += caracteres.charAt(index);
+            }
+
+            document.getElementById('pass').innerText = resultat;
+        }
+    </script>
+</body>
+</html>
