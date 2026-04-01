@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bloc Note Local</title>
+    <style>
+        body { padding: 20px; font-family: sans-serif; background: #fef9e7; }
+        textarea { width: 100%; height: 200px; padding: 15px; border: 2px solid #f1c40f; border-radius: 10px; font-size: 1.1rem; outline: none; }
+        .status { font-size: 0.8rem; color: #7f8c8d; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Mon Bloc-Note (Sauvegarde auto)</h2>
+    <textarea id="note" placeholder="Ecris quelque chose ici..."></textarea>
+    <div id="status" class="status">En attente de modification...</div>
+
+    <script>
+        const zoneTexte = document.getElementById('note');
+        const status = document.getElementById('status');
+
+        // 1. Au chargement, on vérifie s'il y a déjà une note sauvegardée
+        const sauvegarde = localStorage.getItem('maNote');
+        if (sauvegarde) {
+            zoneTexte.value = sauvegarde;
+        }
+
+        // 2. À chaque fois qu'on tape une lettre, on sauvegarde
+        zoneTexte.addEventListener('input', () => {
+            localStorage.setItem('maNote', zoneTexte.value);
+            status.innerText = "Dernière modification : " + new Date().toLocaleTimeString();
+        });
+    </script>
+</body>
+</html>

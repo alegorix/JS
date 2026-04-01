@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Bar</title>
+    <style>
+        .progress-bg { width: 100%; background: #eee; border-radius: 20px; height: 25px; overflow: hidden; }
+        #barre { width: 0%; height: 100%; background: #2ecc71; transition: width 0.2s; }
+        body { padding: 50px; font-family: sans-serif; text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Installation en cours...</h2>
+    <div class="progress-bg">
+        <div id="barre"></div>
+    </div>
+    <p id="pourcentage">0%</p>
+    <button onclick="lancer()">Lancer le téléchargement</button>
+
+    <script>
+        function lancer() {
+            let largeur = 0;
+            const element = document.getElementById('barre');
+            const texte = document.getElementById('pourcentage');
+
+            const intervalle = setInterval(() => {
+                if (largeur >= 100) {
+                    clearInterval(intervalle);
+                    texte.innerText = "Terminé !";
+                } else {
+                    largeur++;
+                    element.style.width = largeur + '%';
+                    texte.innerText = largeur + '%';
+                }
+            }, 50); // On augmente de 1% toutes les 50ms
+        }
+    </script>
+</body>
+</html>

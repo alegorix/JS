@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Key</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 100px; transition: 0.3s; }
+        .key-box { font-size: 3rem; font-weight: bold; color: #3498db; }
+        p { color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+    <p>Appuie sur n'importe quelle touche de ton clavier</p>
+    <div id="affichage" class="key-box">?</div>
+
+    <script>
+        // On écoute l'événement sur toute la fenêtre
+        window.addEventListener('keydown', (event) => {
+            const affichage = document.getElementById('affichage');
+            
+            // event.key contient le nom de la touche
+            affichage.innerText = event.key;
+
+            // Petit bonus : si on appuie sur "r", le fond devient rouge
+            if (event.key === "r") {
+                document.body.style.background = "#fab1a0";
+            } else if (event.key === "b") {
+                document.body.style.background = "#81ecec";
+            } else {
+                document.body.style.background = "white";
+            }
+        });
+    </script>
+</body>
+</html>

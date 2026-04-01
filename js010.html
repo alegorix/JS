@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Effet Zoom JS</title>
+    <style>
+        .zoom-container { 
+            width: 300px; height: 200px; overflow: hidden; 
+            border: 3px solid #333; cursor: crosshair; 
+        }
+        #imgZoom { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.1s ease-out; 
+        }
+    </style>
+</head>
+<body>
+    <h3>Survolez l'image pour zoomer</h3>
+    <div class="zoom-container" onmousemove="zoom(event)" onmouseleave="reset()">
+        <img id="imgZoom" src="https://picsum.photos/id/1015/600/400" alt="Paysage">
+    </div>
+
+    <script>
+        const img = document.getElementById('imgZoom');
+
+        function zoom(e) {
+            // On change l'origine du zoom selon la position de la souris
+            // e.offsetX donne la position X de la souris dans l'élément
+            img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
+            img.style.transform = "scale(2)";
+        }
+
+        function reset() {
+            img.style.transform = "scale(1)";
+        }
+    </script>
+</body>
+</html>
