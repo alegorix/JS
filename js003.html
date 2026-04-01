@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtre Instantané</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input { padding: 10px; width: 100%; margin-bottom: 20px; border: 1px solid #ddd; }
+        .item { padding: 10px; border-bottom: 1px solid #eee; transition: 0.3s; }
+        .item:hover { background: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+    <h2>Mes Articles</h2>
+    <input type="text" id="recherche" placeholder="Rechercher un article..." onkeyup="filtrer()">
+
+    <div id="liste">
+        <div class="item">Apprendre le PHP</div>
+        <div class="item">Maîtriser le CSS</div>
+        <div class="item">Débuter en JavaScript</div>
+        <div class="item">Base de données MySQL</div>
+        <div class="item">Les animations Web</div>
+    </div>
+
+    <script>
+        function filtrer() {
+            // Ce que l'utilisateur tape (en minuscules pour comparer)
+            const mot = document.getElementById('recherche').value.toLowerCase();
+            // On récupère tous les articles
+            const articles = document.querySelectorAll('.item');
+
+            articles.forEach(article => {
+                const texte = article.innerText.toLowerCase();
+                
+                // Si le mot est présent dans le texte de l'article
+                if (texte.includes(mot)) {
+                    article.style.display = "block"; // On affiche
+                } else {
+                    article.style.display = "none";  // On cache
+                }
+            });
+        }
+    </script>
+</body>
+</html>
