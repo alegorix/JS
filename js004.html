@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Visionneuse JS</title>
+    <style>
+        body { text-align: center; font-family: sans-serif; background: #f4f4f4; }
+        .main-img { width: 400px; height: 300px; object-fit: cover; border: 5px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
+        .thumbnails { margin-top: 20px; }
+        .thumb { width: 80px; cursor: pointer; opacity: 0.6; transition: 0.3s; margin: 5px; }
+        .thumb:hover { opacity: 1; transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <h2>Ma Galerie Photo</h2>
+    <img id="affichage" class="main-img" src="https://picsum.photos/id/10/400/300" alt="Image principale">
+
+    <div class="thumbnails">
+        <img class="thumb" src="https://picsum.photos/id/10/80/80" onclick="changerImage('https://picsum.photos/id/10/400/300')">
+        <img class="thumb" src="https://picsum.photos/id/20/80/80" onclick="changerImage('https://picsum.photos/id/20/400/300')">
+        <img class="thumb" src="https://picsum.photos/id/30/80/80" onclick="changerImage('https://picsum.photos/id/30/400/300')">
+    </div>
+
+    <script>
+        function changerImage(url) {
+            const imagePrincipale = document.getElementById('affichage');
+            // On change l'attribut src de la balise <img>
+            imagePrincipale.src = url;
+            // Petit effet de fondu
+            imagePrincipale.style.opacity = 0.5;
+            setTimeout(() => imagePrincipale.style.opacity = 1, 100);
+        }
+    </script>
+</body>
+</html>
