@@ -17,7 +17,8 @@
 <body>
     <h3>Survolez l'image pour zoomer</h3>
     <div class="zoom-container" onmousemove="zoom(event)" onmouseleave="reset()">
-        <img id="imgZoom" src="https://picsum.photos/id/1015/600/400" alt="Paysage">
+        <img id="imgZoom" src="https://loremflickr.com/600/400?lock=1" alt="Paysage">
+        
     </div>
 
     <script>
@@ -27,7 +28,7 @@
             // On change l'origine du zoom selon la position de la souris
             // e.offsetX donne la position X de la souris dans l'élément
             img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
-            img.style.transform = "scale(2)";
+            img.style.transform = "scale(4)";
         }
 
         function reset() {
